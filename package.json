@@ -1,12 +1,22 @@
 {
-  "name": "pwned1",
+  "name": "pwned",
   "version": "1.0.0",
-  "description": "Chrome extension to check if the website you're visiting or
-  the credentials you're entering appear in the hibp database of public breaches",
+  "description": "Chrome extension that checks if the website your visiting or the credentials you're using to login appear in the HIBP database of known breaches",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "start-dev": "webpack & node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Kenneth Koch",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-env": "^2.4.1",
+    "babel-loader": "^7.1.2",
+    "webpack": "^3.10.0"
+  },
+  "dependencies": {
+    "hibp": "^5.2.5"
+  }
 }
