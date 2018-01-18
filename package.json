@@ -1,0 +1,11 @@
+{
+  "name": "pwned",
+  "version": "1.0.0",
+  "description": "Chrome extension to check if the website you're visiting or the credentials you're entering appear in the hibp database of public breaches",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kenneth Koch",
+  "license": "ISC"
+}
