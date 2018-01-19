@@ -17,9 +17,14 @@
   "permissions": [
     "activeTab",
     "tabs",
-    "storage"
+    "storage",
+    "https://*.haveibeenpwned.com/API/v2"
   ],
+  "omnibox": {
+    "keyword": "breach"
+  },
   "background": {
+    "persistent": false,
     "scripts": ["js/background.js"]
   }
 }
