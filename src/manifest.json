@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "Pwned",
+  "description": "Chrome extension to check if the website you're visiting or
+  the credentials you're entering appear in the hibp database of public breaches",
+  "version": "1.0",
+  "icons": {
+    "16":"exclam-icon.png",
+    "48":"Key-icon.png",
+    "128":"Key-icon.png"
+  },
+  "browser_action": {
+    "default_icon": "Key-icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Pwned Checker"
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "background": {
+    "scripts": ["siteCheck.js"]
+  }
+}

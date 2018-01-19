@@ -24,10 +24,10 @@ const { breachedAccount } = require('hibp');
 //   }
 // });
 
-breachedAccount('myemail@gmail.com').then((res) => {
-  if (res) {
-    res.forEach(acctBreach => console.log(acctBreach));
-  } else {
-    console.log('not yet');
-  }
-});
+// breachedAccount('myemail@gmail.com').then((res) => {
+//   if (res) {
+//     res.forEach(acctBreach => console.log(acctBreach));
+//   } else {
+//     console.log('not yet');
+//   }
+// });
