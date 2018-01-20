@@ -20,10 +20,22 @@ document.addEventListener('DOMContentLoaded', () => {
 function myAction(input) {
   console.log(`input value is : ${input.value}`);
   alert(`The entered data is : ${input.value}`);
+
+  chrome.storage.onChanged.addListener((changes, areaName) => {
+    console.log(changes);
+  })
+}
+
+chrome.storage.local.get({respVal: 'defaultValue'}, function(items) {
+    // Do something with items.keyName
+    console.log(items.respVal);
+    document.getElementById('test').textContent = items.respVal
+});
+
+
 //   // do processing with data
 //   // you need to right click the extension icon and choose "inspect popup"
 //   // to view the messages appearing on the console.
-}
 //
 // function documentEvents() {
 //   document.getElementById('ok_btn').addEventListener('click', () => {
