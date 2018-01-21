@@ -1,0 +1,26 @@
+h3 {
+  color: white;
+}
+
+body {
+  background-color: #2e2f30;
+  margin: 10px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+p {
+  max-width: 25px;
+}
+
+h1 {
+  font-size: 15px;
+}
+
+#container {
+  align-items: center;
+  align-content: center;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
