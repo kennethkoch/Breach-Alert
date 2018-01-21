@@ -5,12 +5,13 @@
   the credentials you're entering appear in the hibp database of public breaches",
   "version": "1.0",
   "icons": {
-    "16":"/images/exclam-icon.png",
-    "48":"/images/Key-icon.png",
-    "128":"/images/Key-icon.png"
+    "16":"/images/noBreach.png",
+    "16":"/images/breach.png",
+    "48":"/images/breachMedium.png",
+    "128":"/images/breachLarge.png"
   },
   "browser_action": {
-    "default_icon": "/images/Key-icon.png",
+    "default_icon": "/images/noBreach.png",
     "default_popup": "/html/popup.html",
     "default_title": "Pwned Checker"
   },
