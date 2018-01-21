@@ -31,8 +31,8 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 });
 
 //TO-DO update popup.js when a new url is entered
-chrome.tabs.onUpdated.addListener(() => {
-  console.log();
+chrome.tabs.onUpdated.addListener((tab, changeInfo) => {
+  siteCheck()
 })
 
 function siteCheck() {
