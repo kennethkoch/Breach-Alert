@@ -7,6 +7,9 @@ const queryInfo = {
   // currentWindow: true,
 };
 
+//TODO clean this up
+//this takes a url and turns it into a name that can be used
+//as a param for the api call
 function extractName(url) {
   const domain = url
     .replace('http://', '')
@@ -17,11 +20,8 @@ function extractName(url) {
   }
   return domain.split('.')[0];
 }
-// let tabUpdated = false;
-// chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-//         }
-//     }
-// });
+
+//this will update popup.js when the user switches to a different tab
 chrome.tabs.onActivated.addListener((activeInfo) => {
   console.log(activeInfo);
   siteCheck();
@@ -29,6 +29,11 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
   // let test = chrome.storage.local.get(null);
   // console.log(test);
 });
+
+//TO-DO update popup.js when a new url is entered
+chrome.tabs.onUpdated.addListener(() => {
+  console.log();
+})
 
 function siteCheck() {
   chrome.tabs.query(queryInfo, (tabs) => {
@@ -46,12 +51,7 @@ function siteCheck() {
   };
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4) {
-      // JSON.parse does not evaluate the attacker's scripts so im safe
-      // from XSS, use https only to stop possible MITM attacks
-      // TO-DO find out how to handle 404 when acct is not found in db
       const resp = JSON.parse(xhr.responseText);
-      // const description = resp.Description.replace(/ <a*>/, '')
-      // console.log(description);
       const breachWarning = {
         name: resp.Name,
         pwnCount: resp.PwnCount,
@@ -60,7 +60,6 @@ function siteCheck() {
         domain: resp.Domain,
         description: resp.Description,
       };
-      // console.log(resp);
       chrome.storage.local.set({ breachWarning });
       console.log(breachWarning);
     }
@@ -69,8 +68,6 @@ function siteCheck() {
 })
 }
 
-// const didItWork = chrome.storage.local
-// console.log(didItWork);
 chrome.storage.local.get((result) => {
   console.log(result.breachWarning);
 });
