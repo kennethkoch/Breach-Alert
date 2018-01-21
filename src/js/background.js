@@ -22,14 +22,15 @@ function extractName(url) {
 //         }
 //     }
 // });
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (changeInfo.status === 'complete' && tab.status === 'complete') {
-    const url = tab.url;
-    siteCheck(url);
-    console.log("before save")
-    // let test = chrome.storage.local.get(null);
-    // console.log(test);
-  }
+chrome.tabs.onActivated.addListener((activeInfo) => {
+  console.log(activeInfo);
+  // if (changeInfo.status === 'complete' && tab.status === 'complete') {
+  //   const url = tab.url;
+  //   siteCheck(url);
+  //   console.log('before save');
+  //   // let test = chrome.storage.local.get(null);
+  //   // console.log(test);
+  // }
 });
 
 function siteCheck(url) {
@@ -41,6 +42,7 @@ function siteCheck(url) {
   xhr.onloadend = function () {
     if (xhr.status == 404) {
       console.log('not found');
+      chrome.storage.local.set({breachWarning:null})
     }
   };
   xhr.onreadystatechange = function () {
@@ -51,13 +53,17 @@ function siteCheck(url) {
       const resp = JSON.parse(xhr.responseText);
       // const description = resp.Description.replace(/ <a*>/, '')
       // console.log(description);
-      const alertMessage = `${resp.Name} pwnCount: ${resp.PwnCount}.\n
-      Details: ${resp.Domain} was breached on ${resp.BreachDate}, affecting
-      ${resp.PwnCount} customers. The breach was made public on ${resp.AddedDate},
-       exposing ${resp.DataClasses}`;
+      const breachWarning = {
+        name: resp.Name,
+        pwnCount: resp.PwnCount,
+        breachDate: resp.BreachDate,
+        added: resp.AddedDate,
+        domain: resp.Domain,
+        description: resp.Description,
+      };
       // console.log(resp);
-      chrome.storage.local.set({'respVal': alertMessage})
-      console.log(alertMessage);
+      chrome.storage.local.set({ breachWarning: breachWarning });
+      console.log(breachWarning);
     }
   };
   xhr.send();
@@ -65,4 +71,6 @@ function siteCheck(url) {
 
 // const didItWork = chrome.storage.local
 // console.log(didItWork);
-chrome.storage.local.get(function(result){console.log(result.respVal)})
+chrome.storage.local.get((result) => {
+  console.log(result.breachWarning);
+});

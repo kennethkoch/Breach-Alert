@@ -26,10 +26,14 @@ function myAction(input) {
   })
 }
 
-chrome.storage.local.get({respVal: 'defaultValue'}, function(items) {
+chrome.storage.local.get({breachWarning: 'defaultValue'}, function(items) {
     // Do something with items.keyName
-    console.log(items.respVal);
-    document.getElementById('test').textContent = items.respVal
+    console.log(items.breachWarning);
+    if (items.breachWarning) {
+      document.getElementById('name').textContent = items.breachWarning.name
+      document.getElementById('domain').textContent = items.breachWarning.domain
+      document.getElementById('date').textContent = `breached on ${items.breachWarning.breachDate}`
+    }
 });
 
 
