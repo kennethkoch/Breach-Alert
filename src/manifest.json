@@ -24,7 +24,7 @@
     "keyword": "breach"
   },
   "background": {
-    "persistent": true,
+    "persistent": false,
     "scripts": ["js/background.js"]
   }
 }
