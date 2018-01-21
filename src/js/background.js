@@ -24,25 +24,24 @@ function extractName(url) {
 // });
 chrome.tabs.onActivated.addListener((activeInfo) => {
   console.log(activeInfo);
-  // if (changeInfo.status === 'complete' && tab.status === 'complete') {
-  //   const url = tab.url;
-  //   siteCheck(url);
-  //   console.log('before save');
-  //   // let test = chrome.storage.local.get(null);
-  //   // console.log(test);
-  // }
+  siteCheck();
+  console.log('before save');
+  // let test = chrome.storage.local.get(null);
+  // console.log(test);
 });
 
-function siteCheck(url) {
-  console.log(url);
-  const name = extractName(url);
-  console.log(name);
+function siteCheck() {
+  chrome.tabs.query(queryInfo, (tabs) => {
+    const tab = tabs[0];
+    const url = tab.url;
+    const name = extractName(url);
+    console.log(name);
   const xhr = new XMLHttpRequest();
   xhr.open('GET', `https://haveibeenpwned.com/api/v2/breach/${name}`, true);
   xhr.onloadend = function () {
     if (xhr.status == 404) {
       console.log('not found');
-      chrome.storage.local.set({breachWarning:null})
+      chrome.storage.local.set({ breachWarning: null });
     }
   };
   xhr.onreadystatechange = function () {
@@ -62,11 +61,12 @@ function siteCheck(url) {
         description: resp.Description,
       };
       // console.log(resp);
-      chrome.storage.local.set({ breachWarning: breachWarning });
+      chrome.storage.local.set({ breachWarning });
       console.log(breachWarning);
     }
   };
   xhr.send();
+})
 }
 
 // const didItWork = chrome.storage.local
@@ -74,3 +74,5 @@ function siteCheck(url) {
 chrome.storage.local.get((result) => {
   console.log(result.breachWarning);
 });
+
+siteCheck();
