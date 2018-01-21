@@ -60,7 +60,7 @@ function siteCheck() {
           breachDate: resp.BreachDate,
           added: resp.AddedDate,
           domain: resp.Domain,
-          description: resp.Description,
+          dataTypes: resp.DataClasses,
         };
         chrome.storage.local.set({ breachWarning });
         chrome.browserAction.setTitle({ title: 'PWN ALERT! This site has been breached, click for details' });

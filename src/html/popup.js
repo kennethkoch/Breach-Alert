@@ -31,10 +31,9 @@ chrome.storage.local.get({breachWarning: 'defaultValue'}, function(items) {
     console.log(items.breachWarning);
     if (items.breachWarning) {
       document.getElementById('safe').textContent = `${items.breachWarning.name} has been breached`
-      document.getElementById('description').innerHTML = items.breachWarning.description
-      document.getElementById('name').textContent = items.breachWarning.name
-      document.getElementById('domain').textContent = items.breachWarning.domain
       document.getElementById('date').textContent = `breached on ${items.breachWarning.breachDate}`
+      document.getElementById('dataTypes').innerHTML = `${items.breachWarning.dataTypes.join(', ')}
+       have been publicly available <br/> since at least ${items.breachWarning.added}`
     } else {
       document.getElementById('safe').textContent = `this site not has been breached`
       document.getElementById('check').innerHTML = `However, you're data may have <br/>been
