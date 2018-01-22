@@ -30,13 +30,12 @@ chrome.storage.local.get({breachWarning: 'defaultValue'}, function(items) {
     console.log(items.breachWarning);
     if (items.breachWarning) {
       document.getElementById('breached').textContent = `${items.breachWarning.name} has been breached`
-      document.getElementById('domain').innerText = items.breachWarning.domain
-      document.getElementById('date').textContent = items.breachWarning.breachDate
-      document.getElementById('dataTypes').innerHTML = `${items.breachWarning.dataTypes.join(', ')}
-       have been publicly available <br/> since at least ${items.breachWarning.added}`
+      document.getElementById('pwnCount').innerText = `Pwn Count: ${items.breachWarning.pwnCount}`
+      document.getElementById('description').innerHTML += `<p>${items.breachWarning.description}</p>`
     } else {
       document.getElementById('safe').textContent = `this site not has been breached`
-      document.getElementById('check').innerHTML = `However, you're data may have <br/>been
+      document.getElementById('breachMessage').innerText = ``
+      document.getElementById('check').innerText = `However, you're data may have been
                                                       compromised elsewhere.`
     }
 });

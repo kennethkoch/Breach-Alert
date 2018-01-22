@@ -1,23 +1,33 @@
-h3 {
-  color: white;
-}
 
 body {
   color: white;
   background-color: #2e2f30;
-  margin: 10px;
   white-space: nowrap;
   text-align: center;
-  padding: 10px;
+}
+
+#dataTypes {
+  padding: 0px 10px;
 }
 
 #breached {
-  color: red;
-  font-size: 18px;
+  color: #a33e3e;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+#pwnCount {
+  color: #a33e3e;
+  margin-top: 0px;
 }
 
 h1 {
   font-size: 15px;
+}
+
+#description {
+  white-space: pre-wrap;
 }
 
 #container {
@@ -26,4 +36,9 @@ h1 {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+}
+
+a {
+  text-decoration: none;
+  color: #4e89ba;
 }
