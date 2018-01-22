@@ -10,26 +10,13 @@ function extractName(url) {
   }
   return domain.split('.')[0];
 }
-function formatDate(date) {
-  let newDate = new Date(date);
-  newDate = newDate.toLocaleString();
-  return newDate.split(',')[0];
-}
-
-function formatDataClasses(dataClasses) {
-  const last = dataClasses[dataClasses.length - 1];
-  const rest = dataClasses.splice(0, dataClasses.length - 1);
-  let result = `${rest.join(', ')} and ${last}`;
-  result = result.substr(0, 1) + result.substr(1).toLowerCase();
-  return result;
-}
 
 // this will update popup.js when the user switches to a different tab
 chrome.tabs.onActivated.addListener((activeInfo) => {
   siteCheck();
 });
 
-// TO-DO update popup.js when a new url is entered
+//this updates popup.js when the user enters a new url
 chrome.tabs.onUpdated.addListener((tab, changeInfo) => {
   siteCheck();
 });
@@ -56,22 +43,15 @@ function siteCheck() {
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4) {
         const resp = JSON.parse(xhr.responseText);
-        const publicDate = formatDate(resp.AddedDate);
-        const breachDate = formatDate(resp.BreachDate);
-        const dataTypes = formatDataClasses(resp.DataClasses);
         const pwnCount = resp.PwnCount.toLocaleString();
         const breachWarning = {
           name: resp.Name,
           pwnCount,
-          breachDate,
-          publicDate,
-          domain: resp.Domain,
-          dataTypes,
           description: resp.Description,
         };
         chrome.storage.local.set({ breachWarning });
         chrome.browserAction.setTitle({
-          title: 'PWN ALERT! This site has been breached, click for details',
+          title: 'BREACH ALERT! This site has been breached, click for details',
         });
         chrome.browserAction.setIcon({ path: { 19: 'images/breach.png' } });
       }
@@ -79,4 +59,3 @@ function siteCheck() {
     xhr.send();
   });
 }
-siteCheck();
