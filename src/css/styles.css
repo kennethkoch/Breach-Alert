@@ -30,6 +30,20 @@ h1 {
   white-space: pre-wrap;
 }
 
+#noBreachMessage {
+  white-space: pre-wrap;
+}
+
+#never {
+  color: #a33e3e;
+  font-weight: 800;
+}
+
+#safe {
+  font-size: 18px;
+  color: #4c8c48;
+}
+
 #container {
   align-items: center;
   align-content: center;

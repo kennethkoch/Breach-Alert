@@ -65,7 +65,7 @@ function siteCheck() {
         chrome.browserAction.setIcon({ path: { 19: 'images/noBreach.png' } });
         chrome.browserAction.setTitle({
           title:
-            'No public breach data was found for this site, click to check if your accounts have been exposed elsewhere',
+            'No breaches found.',
         });
       }
     };
