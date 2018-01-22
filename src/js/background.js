@@ -6,7 +6,7 @@ function extractName(url) {
     .replace('https://', '')
     .split(/[/?#]/)[0];
   if (domain.split('.').length > 2) {
-    return domain.split('.')[domain.split('.').length - 1];
+    return domain.split('.')[domain.split('.').length - 2];
   }
   return domain.split('.')[0];
 }
@@ -16,7 +16,7 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
   siteCheck();
 });
 
-//this updates popup.js when the user enters a new url
+// this will update popup.js when a new url is entered
 chrome.tabs.onUpdated.addListener((tab, changeInfo) => {
   siteCheck();
 });
@@ -24,6 +24,7 @@ chrome.tabs.onUpdated.addListener((tab, changeInfo) => {
 const queryInfo = {
   active: true,
 };
+
 function siteCheck() {
   chrome.tabs.query(queryInfo, (tabs) => {
     const tab = tabs[0];
@@ -32,7 +33,7 @@ function siteCheck() {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `https://haveibeenpwned.com/api/v2/breach/${name}`, true);
     xhr.onloadend = function () {
-      if (xhr.status === 404) {
+      if (xhr.status == 404) {
         chrome.storage.local.set({ breachWarning: null });
         chrome.browserAction.setIcon({ path: { 19: 'images/noBreach.png' } });
         chrome.browserAction.setTitle({
@@ -41,7 +42,7 @@ function siteCheck() {
       }
     };
     xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4) {
+      if (xhr.readyState == 4) {
         const resp = JSON.parse(xhr.responseText);
         const pwnCount = resp.PwnCount.toLocaleString();
         const breachWarning = {
