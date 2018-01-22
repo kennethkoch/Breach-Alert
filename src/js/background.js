@@ -21,6 +21,21 @@ function extractName(url) {
   return domain.split('.')[0];
 }
 
+function formatDate(date) {
+  let newDate = new Date(date);
+  newDate = newDate.toLocaleString();
+  return newDate.split(',')[0];
+}
+
+function formatDataClasses(dataClasses) {
+  console.log(dataClasses);
+  const last = dataClasses[dataClasses.length - 1];
+  const rest = dataClasses.splice(0, dataClasses.length - 1);
+  let result = `${rest.join(', ')} and ${last}`;
+  result = result.substr(0, 1) + result.substr(1).toLowerCase();
+  return result;
+}
+
 // this will update popup.js when the user switches to a different tab
 chrome.tabs.onActivated.addListener((activeInfo) => {
   console.log(activeInfo);
@@ -48,22 +63,33 @@ function siteCheck() {
         console.log('not found');
         chrome.storage.local.set({ breachWarning: null });
         chrome.browserAction.setIcon({ path: { 19: 'images/noBreach.png' } });
-        chrome.browserAction.setTitle({ title: 'No public breach data was found for this site, click to check if your accounts have been exposed elsewhere' });
+        chrome.browserAction.setTitle({
+          title:
+            'No breaches found.',
+        });
       }
     };
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4) {
         const resp = JSON.parse(xhr.responseText);
+        const publicDate = formatDate(resp.AddedDate);
+        const breachDate = formatDate(resp.BreachDate);
+        const dataTypes = formatDataClasses(resp.DataClasses);
+        const pwnCount = resp.PwnCount.toLocaleString();
         const breachWarning = {
           name: resp.Name,
-          pwnCount: resp.PwnCount,
-          breachDate: resp.BreachDate,
-          added: resp.AddedDate,
+          pwnCount,
+          breachDate,
+          publicDate,
           domain: resp.Domain,
+          dataTypes,
           description: resp.Description,
         };
+        console.log(`pwncount:::::::${breachWarning.description}`);
         chrome.storage.local.set({ breachWarning });
-        chrome.browserAction.setTitle({ title: 'PWN ALERT! This site has been breached, click for details' });
+        chrome.browserAction.setTitle({
+          title: 'PWN ALERT! This site has been breached, click for details',
+        });
         chrome.browserAction.setIcon({ path: { 19: 'images/breach.png' } });
         console.log(breachWarning);
       }

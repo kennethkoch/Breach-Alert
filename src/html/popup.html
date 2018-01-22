@@ -1,20 +1,8 @@
 <!doctype html>
-<!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
- -->
 <html>
   <head>
     <title>Pwn Alert</title>
     <link rel="stylesheet" type='text/css' href='../css/styles.css'/>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-    -->
     <script src="popup.js"></script>
   </head>
 
@@ -22,13 +10,10 @@
     <div id="container">
     <div>
         <h3 id='safe'></h3>
+        <h2 id='breached'></h2>
+        <h3 id='pwnCount'></h3>
         <p id='description'></p>
-        <h1 id='name'></h1>
-        <h1 id='domain'></h1>
-        <h1 id='date'></h1>
-        <p id='check'></p>
-        <input id="name_textbox" />
-         <button id="ok_btn" type="button">OK</button>
+        <p id='noBreachMessage'></p>
     </div>
     </div>
   </body>

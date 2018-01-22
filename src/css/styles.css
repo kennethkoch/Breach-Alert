@@ -1,20 +1,47 @@
-h3 {
-  color: white;
-}
 
 body {
+  color: white;
   background-color: #2e2f30;
-  margin: 10px;
   white-space: nowrap;
   text-align: center;
 }
 
-p {
-  max-width: 25px;
+#dataTypes {
+  padding: 0px 10px;
+}
+
+#breached {
+  color: #a33e3e;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+#pwnCount {
+  color: #a33e3e;
+  margin-top: 0px;
 }
 
 h1 {
   font-size: 15px;
+}
+
+#description {
+  white-space: pre-wrap;
+}
+
+#noBreachMessage {
+  white-space: pre-wrap;
+}
+
+#never {
+  color: #a33e3e;
+  font-weight: 800;
+}
+
+#safe {
+  font-size: 18px;
+  color: #4c8c48;
 }
 
 #container {
@@ -23,4 +50,9 @@ h1 {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+}
+
+a {
+  text-decoration: none;
+  color: #4e89ba;
 }
