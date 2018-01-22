@@ -32,7 +32,7 @@ function siteCheck() {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `https://haveibeenpwned.com/api/v2/breach/${name}`, true);
     xhr.onloadend = function () {
-      if (xhr.status == 404) {
+      if (xhr.status === 404) {
         chrome.storage.local.set({ breachWarning: null });
         chrome.browserAction.setIcon({ path: { 19: 'images/noBreach.png' } });
         chrome.browserAction.setTitle({
@@ -41,7 +41,7 @@ function siteCheck() {
       }
     };
     xhr.onreadystatechange = function () {
-      if (xhr.readyState == 4) {
+      if (xhr.readyState === 4) {
         const resp = JSON.parse(xhr.responseText);
         const pwnCount = resp.PwnCount.toLocaleString();
         const breachWarning = {

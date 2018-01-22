@@ -1,8 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "Pwn Alert",
-  "description": "Chrome extension to check if the website you're visiting has been
-  the victim of a breach exposing user data.",
+  "name": "Breach Alert",
+  "description": "Chrome extension to check if the website you're visiting has been the victim of a breach exposing user data.",
   "version": "1.0",
   "icons": {
     "16":"/images/noBreach.png",
@@ -13,7 +12,7 @@
   "browser_action": {
     "default_icon": "/images/noBreach.png",
     "default_popup": "/html/popup.html",
-    "default_title": "Pwn Alert"
+    "default_title": "Breach Alert"
   },
   "permissions": [
     "activeTab",
