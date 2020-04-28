@@ -25,6 +25,20 @@ const queryInfo = {
   active: true,
 };
 
+// function accountCheck(accountOrEmail) {
+//   const account = encodeURI(accountOrEmail)
+//   console.log(account);
+//   const xhr = new XMLHttpRequest();
+//   xhr.open('GET', `https://haveibeenpwned.com/api/v2/breachedaccount/${account}`, true);
+//   xhr.onreadystatechange = function () {
+//     if (xhr.readyState == 4) {
+//       const resp = JSON.parse(xhr.responseText);
+//       console.log(resp);
+//     }
+//   }
+//   xhr.send()
+// }
+
 function siteCheck() {
   chrome.tabs.query(queryInfo, (tabs) => {
     const tab = tabs[0];
