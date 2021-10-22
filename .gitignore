@@ -3,3 +3,4 @@ bundle.js
 bundle.js.map
 .babelrc
 webpack.config.js
+src.pem
